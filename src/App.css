@@ -1,0 +1,11 @@
+.app-container {
+  display: flex;
+}
+ 
+.main-container {
+  margin-left: 250px; /* Espacio para el sidebar */
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  width: calc(100% - 500px);
+  padding: 20px;
+}
