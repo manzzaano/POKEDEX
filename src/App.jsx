@@ -14,7 +14,7 @@ export default function App() {
   const [indicePokemon, setIndicePokemon] = useState(0);
   const [tipoSeleccionado, setTipoSeleccionado] = useState("");
 
-  // Cargar los 151 Pokémon y sus detalles
+  // Cargar los 151 Pokémon y sus detallesx
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=151")
@@ -60,7 +60,7 @@ export default function App() {
 
   const handleClick = (pokemon) => {
     updatePokemon(pokemon);
-    const index = pokemonFiltrados.findIndex(p => p.name === pokemon.name);
+    const index = pokemonFiltrados.findIndex((p) => p.name === pokemon.name);
     setIndicePokemon(index);
   };
 
@@ -76,7 +76,9 @@ export default function App() {
 
   // Filtrado por nombre y tipo usando detalles cargados previamente
   const pokemonFiltrados = pokemonData.filter((pokemon) => {
-    const coincideNombre = pokemon.name.toLowerCase().includes(consultaBusqueda.toLowerCase());
+    const coincideNombre = pokemon.name
+      .toLowerCase()
+      .includes(consultaBusqueda.toLowerCase());
     if (!tipoSeleccionado) return coincideNombre;
 
     const detalles = detallesPokemon[pokemon.name];
@@ -95,6 +97,7 @@ export default function App() {
         pokemonFiltrados={pokemonFiltrados}
         tipoSeleccionado={tipoSeleccionado}
         setTipoSeleccionado={setTipoSeleccionado}
+        updatePokemon={updatePokemon}
       />
       <Favoritos
         listFavs={listFavs}
@@ -113,6 +116,7 @@ export default function App() {
           indicePokemon={indicePokemon}
           setIndicePokemon={setIndicePokemon}
           pokemonFiltrados={pokemonFiltrados}
+          detallesPokemon={detallesPokemon}
         />
       </div>
     </div>
