@@ -2,6 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import CleanLogo from './ui/CleanLogo'
 
+const BASE = import.meta.env.BASE_URL
+
 const STARTERS = [
   [1, 4, 7],
   [152, 155, 158],
@@ -71,7 +73,7 @@ export default function HomeScreen({ onSelectRegion }) {
           transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: 36, textAlign: 'center' }}
         >
           <CleanLogo
-            src="/pokemon-logo.png"
+            src={`${BASE}pokemon-logo.png`}
             width={360}
             style={{ marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))' }}
           />
@@ -152,7 +154,7 @@ export default function HomeScreen({ onSelectRegion }) {
           >
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ width: 72, height: 72, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)' }}>
-                <img src="/pokeball.png" alt="" style={{ width: 56, height: 56, objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
+                <img src={`${BASE}pokeball.png`} alt="" style={{ width: 56, height: 56, objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
               </div>
             </div>
             <div style={{ textAlign: 'center' }}>
