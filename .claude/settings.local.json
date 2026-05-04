@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm uninstall *)",
+      "Bash(rm \"C:\\\\Users\\\\Ismael\\\\Documents\\\\Estudios\\\\1º DAM 24-25\\\\Practicas\\\\PRÁCTICAS 1º DAM \\(SAVIA\\)\\\\REACT\\\\POKEDEX - IML\\\\POKEDEX\\\\src\\\\features\\\\favorites\\\\FavoritesPanel.jsx\")",
+      "Bash(rm \"C:\\\\Users\\\\Ismael\\\\Documents\\\\Estudios\\\\1º DAM 24-25\\\\Practicas\\\\PRÁCTICAS 1º DAM \\(SAVIA\\)\\\\REACT\\\\POKEDEX - IML\\\\POKEDEX\\\\src\\\\hooks\\\\useFavorites.js\")",
+      "Bash(rm \"C:\\\\Users\\\\Ismael\\\\Documents\\\\Estudios\\\\1º DAM 24-25\\\\Practicas\\\\PRÁCTICAS 1º DAM \\(SAVIA\\)\\\\REACT\\\\POKEDEX - IML\\\\POKEDEX\\\\src\\\\components\\\\ui\\\\AnimatedBackground.jsx\")",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_type"
+    ]
+  }
+}
