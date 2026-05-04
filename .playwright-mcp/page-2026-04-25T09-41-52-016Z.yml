@@ -1,0 +1,33 @@
+- generic [ref=e3]:
+  - generic [ref=e9]: POKÉDEX
+  - generic [ref=e10]:
+    - complementary [ref=e12]:
+      - heading "POKEDEX" [level=1] [ref=e14]
+      - generic [ref=e16]:
+        - img [ref=e18]
+        - textbox "Buscar..." [ref=e20]
+      - combobox [ref=e22] [cursor=pointer]:
+        - option "Todos los tipos" [selected]
+        - option "Normal"
+        - option "Lucha"
+        - option "Volador"
+        - option "Veneno"
+        - option "Tierra"
+        - option "Roca"
+        - option "Bicho"
+        - option "Fantasma"
+        - option "Acero"
+        - option "Fuego"
+        - option "Agua"
+        - option "Planta"
+        - option "Eléctrico"
+        - option "Psíquico"
+        - option "Hielo"
+        - option "Dragón"
+        - option "Siniestro"
+        - option "Hada"
+        - option "stellar"
+      - generic [ref=e23]: Cargando...
+    - generic [ref=e65]:
+      - paragraph [ref=e66]: 🎮
+      - paragraph [ref=e67]: Selecciona un Pokemon

@@ -1,0 +1,214 @@
+- generic [ref=e3]:
+  - generic [ref=e9]: POKÉDEX
+  - generic [ref=e10]:
+    - complementary [ref=e12]:
+      - heading "POKEDEX" [level=1] [ref=e14]
+      - generic [ref=e16]:
+        - img [ref=e18]
+        - textbox "Buscar..." [ref=e20]
+      - combobox [ref=e22] [cursor=pointer]:
+        - option "Todos los tipos" [selected]
+        - option "Normal"
+        - option "Lucha"
+        - option "Volador"
+        - option "Veneno"
+        - option "Tierra"
+        - option "Roca"
+        - option "Bicho"
+        - option "Fantasma"
+        - option "Acero"
+        - option "Fuego"
+        - option "Agua"
+        - option "Planta"
+        - option "Eléctrico"
+        - option "Psíquico"
+        - option "Hielo"
+        - option "Dragón"
+        - option "Siniestro"
+        - option "Hada"
+        - option "stellar"
+      - generic [ref=e23]: 1350 poke
+      - list [ref=e25]:
+        - generic [ref=e26] [cursor=pointer]:
+          - img "bulbasaur" [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e29]: bulbasaur
+            - generic [ref=e30]: "#0001"
+        - generic [ref=e31] [cursor=pointer]:
+          - img "ivysaur" [ref=e32]
+          - generic [ref=e33]:
+            - generic [ref=e34]: ivysaur
+            - generic [ref=e35]: "#0002"
+        - generic [ref=e36] [cursor=pointer]:
+          - img "venusaur" [ref=e37]
+          - generic [ref=e38]:
+            - generic [ref=e39]: venusaur
+            - generic [ref=e40]: "#0003"
+        - generic [ref=e41] [cursor=pointer]:
+          - img "charmander" [ref=e42]
+          - generic [ref=e43]:
+            - generic [ref=e44]: charmander
+            - generic [ref=e45]: "#0004"
+        - generic [ref=e46] [cursor=pointer]:
+          - img "charmeleon" [ref=e47]
+          - generic [ref=e48]:
+            - generic [ref=e49]: charmeleon
+            - generic [ref=e50]: "#0005"
+        - generic [ref=e51] [cursor=pointer]:
+          - img "charizard" [ref=e52]
+          - generic [ref=e53]:
+            - generic [ref=e54]: charizard
+            - generic [ref=e55]: "#0006"
+        - generic [ref=e56] [cursor=pointer]:
+          - img "squirtle" [ref=e57]
+          - generic [ref=e58]:
+            - generic [ref=e59]: squirtle
+            - generic [ref=e60]: "#0007"
+        - generic [ref=e61] [cursor=pointer]:
+          - img "wartortle" [ref=e62]
+          - generic [ref=e63]:
+            - generic [ref=e64]: wartortle
+            - generic [ref=e65]: "#0008"
+        - generic [ref=e66] [cursor=pointer]:
+          - img "blastoise" [ref=e67]
+          - generic [ref=e68]:
+            - generic [ref=e69]: blastoise
+            - generic [ref=e70]: "#0009"
+        - generic [ref=e71] [cursor=pointer]:
+          - img "caterpie" [ref=e72]
+          - generic [ref=e73]:
+            - generic [ref=e74]: caterpie
+            - generic [ref=e75]: "#0010"
+        - generic [ref=e76] [cursor=pointer]:
+          - img "metapod" [ref=e77]
+          - generic [ref=e78]:
+            - generic [ref=e79]: metapod
+            - generic [ref=e80]: "#0011"
+        - generic [ref=e81] [cursor=pointer]:
+          - img "butterfree" [ref=e82]
+          - generic [ref=e83]:
+            - generic [ref=e84]: butterfree
+            - generic [ref=e85]: "#0012"
+        - generic [ref=e86] [cursor=pointer]:
+          - img "weedle" [ref=e87]
+          - generic [ref=e88]:
+            - generic [ref=e89]: weedle
+            - generic [ref=e90]: "#0013"
+        - generic [ref=e91] [cursor=pointer]:
+          - img "kakuna" [ref=e92]
+          - generic [ref=e93]:
+            - generic [ref=e94]: kakuna
+            - generic [ref=e95]: "#0014"
+        - generic [ref=e96] [cursor=pointer]:
+          - img "beedrill" [ref=e97]
+          - generic [ref=e98]:
+            - generic [ref=e99]: beedrill
+            - generic [ref=e100]: "#0015"
+        - generic [ref=e101] [cursor=pointer]:
+          - img "pidgey" [ref=e102]
+          - generic [ref=e103]:
+            - generic [ref=e104]: pidgey
+            - generic [ref=e105]: "#0016"
+        - generic [ref=e106] [cursor=pointer]:
+          - img "pidgeotto" [ref=e107]
+          - generic [ref=e108]:
+            - generic [ref=e109]: pidgeotto
+            - generic [ref=e110]: "#0017"
+        - generic [ref=e111] [cursor=pointer]:
+          - img "pidgeot" [ref=e112]
+          - generic [ref=e113]:
+            - generic [ref=e114]: pidgeot
+            - generic [ref=e115]: "#0018"
+        - generic [ref=e116] [cursor=pointer]:
+          - img "rattata" [ref=e117]
+          - generic [ref=e118]:
+            - generic [ref=e119]: rattata
+            - generic [ref=e120]: "#0019"
+        - generic [ref=e121] [cursor=pointer]:
+          - img "raticate" [ref=e122]
+          - generic [ref=e123]:
+            - generic [ref=e124]: raticate
+            - generic [ref=e125]: "#0020"
+    - generic [ref=e249]:
+      - generic [ref=e250]:
+        - generic [ref=e251]:
+          - generic [ref=e252]:
+            - img "wartortle" [ref=e253]
+            - heading "wartortle" [level=2] [ref=e254]
+            - generic [ref=e255]: "#0008"
+          - generic [ref=e257]: Agua
+        - generic [ref=e259]:
+          - 'heading "ESTADISTICAS (Total: 405)" [level=3] [ref=e260]'
+          - generic [ref=e261]:
+            - generic [ref=e262]:
+              - generic [ref=e263]: PS
+              - generic [ref=e266]: "59"
+            - generic [ref=e267]:
+              - generic [ref=e268]: Ataque
+              - generic [ref=e271]: "63"
+            - generic [ref=e272]:
+              - generic [ref=e273]: Defensa
+              - generic [ref=e276]: "80"
+            - generic [ref=e277]:
+              - generic [ref=e278]: At. Esp.
+              - generic [ref=e281]: "65"
+            - generic [ref=e282]:
+              - generic [ref=e283]: Def. Esp.
+              - generic [ref=e286]: "80"
+            - generic [ref=e287]:
+              - generic [ref=e288]: Velocidad
+              - generic [ref=e291]: "58"
+      - generic [ref=e292]:
+        - generic [ref=e294]:
+          - generic [ref=e295]:
+            - generic [ref=e296]:
+              - paragraph [ref=e297]: Peso
+              - paragraph [ref=e298]: 22.5kg
+            - generic [ref=e299]:
+              - paragraph [ref=e300]: Altura
+              - paragraph [ref=e301]: 1.0m
+          - generic [ref=e302]:
+            - heading "HABILIDADES" [level=3] [ref=e303]
+            - generic [ref=e304]:
+              - generic [ref=e305]: torrent
+              - generic [ref=e306]: rain dish(oculta)
+          - generic [ref=e307]:
+            - heading "MOVIMIENTOS (101)" [level=3] [ref=e308]
+            - generic [ref=e309]:
+              - generic [ref=e310]: mega punch
+              - generic [ref=e311]: ice punch
+              - generic [ref=e312]: mega kick
+              - generic [ref=e313]: headbutt
+              - generic [ref=e314]: tackle
+              - generic [ref=e315]: body slam
+              - generic [ref=e316]: take down
+              - generic [ref=e317]: double edge
+              - generic [ref=e318]: tail whip
+              - generic [ref=e319]: bite
+              - generic [ref=e320]: mist
+              - generic [ref=e321]: water gun
+              - generic [ref=e322]: hydro pump
+              - generic [ref=e323]: surf
+              - generic [ref=e324]: ice beam
+              - generic [ref=e325]: blizzard
+              - generic [ref=e326]: bubble beam
+              - generic [ref=e327]: submission
+              - generic [ref=e328]: counter
+              - generic [ref=e329]: seismic toss
+              - generic [ref=e330]: +81 más
+        - generic [ref=e332]:
+          - heading "EVOLUCIONES" [level=3] [ref=e333]
+          - generic [ref=e334]:
+            - generic [ref=e335]:
+              - button "squirtle squirtle" [ref=e336]:
+                - img "squirtle" [ref=e337]
+                - generic [ref=e338]: squirtle
+              - generic [ref=e339]: →
+            - generic [ref=e340]:
+              - button "wartortle wartortle" [ref=e341]:
+                - img "wartortle" [ref=e342]
+                - generic [ref=e343]: wartortle
+              - generic [ref=e344]: →
+            - button "blastoise blastoise" [ref=e346]:
+              - img "blastoise" [ref=e347]
+              - generic [ref=e348]: blastoise

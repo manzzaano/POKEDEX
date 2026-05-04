@@ -1,37 +1,80 @@
 @import "tailwindcss";
 
-/* ===== Custom theme / design tokens ===== */
 @theme {
-  --color-pokemon-red: #ef4444;
-  --color-pokemon-blue: #3b82f6;
-  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-bg: #050505;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --font-family-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* ===== Base styles ===== */
 @layer base {
-  html {
-    font-family: var(--font-family-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
-  body {
-    @apply bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100
-           transition-colors duration-300;
+  html, body {
+    height: 100%;
+    font-family: var(--font-family-sans);
+    background: #050505;
+    color: #ffffff;
     overflow: hidden;
   }
 
-  /* Scrollbar custom */
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    position: relative;
+  }
+
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(160px);
+    z-index: 0;
+  }
+
+  body::before {
+    width: 600px;
+    height: 600px;
+    top: -10%;
+    left: -5%;
+    background: rgba(160, 185, 210, 0.5);
+  }
+
+  body::after {
+    width: 500px;
+    height: 500px;
+    bottom: -10%;
+    right: -5%;
+    background: rgba(240, 230, 215, 0.5);
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
   }
+
   ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    background: transparent;
   }
+
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-gray-600;
+    background: rgba(255, 255, 255, 0.2);
   }
 }

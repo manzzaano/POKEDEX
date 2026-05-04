@@ -1,19 +1,28 @@
-import usePokedexStore from '../store/usePokedexStore'
+import { useEffect, useState, useCallback } from 'react'
 
-/**
- * Hook para gestionar favoritos.
- * Abstrae la lógica del store de Zustand.
- */
-export default function useFavorites() {
-    const favorites = usePokedexStore((s) => s.favorites)
-    const toggleFavorite = usePokedexStore((s) => s.toggleFavorite)
-    const isFavorite = usePokedexStore((s) => s.isFavorite)
-    const clearFavorites = usePokedexStore((s) => s.clearFavorites)
+const KEY = 'pokedex_favs'
 
-    return {
-        favorites,
-        toggleFavorite,
-        isFavorite,
-        clearFavorites,
+const load = () => {
+    try {
+        const raw = localStorage.getItem(KEY)
+        return raw ? JSON.parse(raw) : []
+    } catch {
+        return []
     }
+}
+
+export default function useFavorites() {
+    const [favs, setFavs] = useState(load)
+
+    useEffect(() => {
+        try { localStorage.setItem(KEY, JSON.stringify(favs)) } catch {}
+    }, [favs])
+
+    const toggle = useCallback((id) => {
+        setFavs((f) => (f.includes(id) ? f.filter((x) => x !== id) : [...f, id]))
+    }, [])
+
+    const isFav = useCallback((id) => favs.includes(id), [favs])
+
+    return { favs, toggle, isFav }
 }

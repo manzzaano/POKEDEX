@@ -1,0 +1,216 @@
+- generic [ref=e3]:
+  - generic [ref=e9]: POKÉDEX
+  - generic [ref=e10]:
+    - complementary [ref=e12]:
+      - heading "POKEDEX" [level=1] [ref=e14]
+      - generic [ref=e16]:
+        - img [ref=e18]
+        - textbox "Buscar..." [ref=e20]
+      - combobox [ref=e22] [cursor=pointer]:
+        - option "Todos los tipos" [selected]
+        - option "Normal"
+        - option "Lucha"
+        - option "Volador"
+        - option "Veneno"
+        - option "Tierra"
+        - option "Roca"
+        - option "Bicho"
+        - option "Fantasma"
+        - option "Acero"
+        - option "Fuego"
+        - option "Agua"
+        - option "Planta"
+        - option "Eléctrico"
+        - option "Psíquico"
+        - option "Hielo"
+        - option "Dragón"
+        - option "Siniestro"
+        - option "Hada"
+        - option "stellar"
+      - generic [ref=e23]: 1350 poke
+      - list [ref=e25]:
+        - generic [ref=e26] [cursor=pointer]:
+          - img "bulbasaur" [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e29]: bulbasaur
+            - generic [ref=e30]: "#0001"
+        - generic [ref=e31] [cursor=pointer]:
+          - img "ivysaur" [ref=e32]
+          - generic [ref=e33]:
+            - generic [ref=e34]: ivysaur
+            - generic [ref=e35]: "#0002"
+        - generic [ref=e36] [cursor=pointer]:
+          - img "venusaur" [ref=e37]
+          - generic [ref=e38]:
+            - generic [ref=e39]: venusaur
+            - generic [ref=e40]: "#0003"
+        - generic [ref=e41] [cursor=pointer]:
+          - img "charmander" [ref=e42]
+          - generic [ref=e43]:
+            - generic [ref=e44]: charmander
+            - generic [ref=e45]: "#0004"
+        - generic [ref=e46] [cursor=pointer]:
+          - img "charmeleon" [ref=e47]
+          - generic [ref=e48]:
+            - generic [ref=e49]: charmeleon
+            - generic [ref=e50]: "#0005"
+        - generic [ref=e51] [cursor=pointer]:
+          - img "charizard" [ref=e52]
+          - generic [ref=e53]:
+            - generic [ref=e54]: charizard
+            - generic [ref=e55]: "#0006"
+        - generic [ref=e56] [cursor=pointer]:
+          - img "squirtle" [ref=e57]
+          - generic [ref=e58]:
+            - generic [ref=e59]: squirtle
+            - generic [ref=e60]: "#0007"
+        - generic [ref=e61] [cursor=pointer]:
+          - img "wartortle" [ref=e62]
+          - generic [ref=e63]:
+            - generic [ref=e64]: wartortle
+            - generic [ref=e65]: "#0008"
+        - generic [ref=e66] [cursor=pointer]:
+          - img "blastoise" [ref=e67]
+          - generic [ref=e68]:
+            - generic [ref=e69]: blastoise
+            - generic [ref=e70]: "#0009"
+        - generic [ref=e71] [cursor=pointer]:
+          - img "caterpie" [ref=e72]
+          - generic [ref=e73]:
+            - generic [ref=e74]: caterpie
+            - generic [ref=e75]: "#0010"
+        - generic [ref=e76] [cursor=pointer]:
+          - img "metapod" [ref=e77]
+          - generic [ref=e78]:
+            - generic [ref=e79]: metapod
+            - generic [ref=e80]: "#0011"
+        - generic [ref=e81] [cursor=pointer]:
+          - img "butterfree" [ref=e82]
+          - generic [ref=e83]:
+            - generic [ref=e84]: butterfree
+            - generic [ref=e85]: "#0012"
+        - generic [ref=e86] [cursor=pointer]:
+          - img "weedle" [ref=e87]
+          - generic [ref=e88]:
+            - generic [ref=e89]: weedle
+            - generic [ref=e90]: "#0013"
+        - generic [ref=e91] [cursor=pointer]:
+          - img "kakuna" [ref=e92]
+          - generic [ref=e93]:
+            - generic [ref=e94]: kakuna
+            - generic [ref=e95]: "#0014"
+        - generic [ref=e96] [cursor=pointer]:
+          - img "beedrill" [ref=e97]
+          - generic [ref=e98]:
+            - generic [ref=e99]: beedrill
+            - generic [ref=e100]: "#0015"
+        - generic [ref=e101] [cursor=pointer]:
+          - img "pidgey" [ref=e102]
+          - generic [ref=e103]:
+            - generic [ref=e104]: pidgey
+            - generic [ref=e105]: "#0016"
+        - generic [ref=e106] [cursor=pointer]:
+          - img "pidgeotto" [ref=e107]
+          - generic [ref=e108]:
+            - generic [ref=e109]: pidgeotto
+            - generic [ref=e110]: "#0017"
+        - generic [ref=e111] [cursor=pointer]:
+          - img "pidgeot" [ref=e112]
+          - generic [ref=e113]:
+            - generic [ref=e114]: pidgeot
+            - generic [ref=e115]: "#0018"
+        - generic [ref=e116] [cursor=pointer]:
+          - img "rattata" [ref=e117]
+          - generic [ref=e118]:
+            - generic [ref=e119]: rattata
+            - generic [ref=e120]: "#0019"
+        - generic [ref=e121] [cursor=pointer]:
+          - img "raticate" [ref=e122]
+          - generic [ref=e123]:
+            - generic [ref=e124]: raticate
+            - generic [ref=e125]: "#0020"
+    - generic [ref=e129]:
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - img "bulbasaur" [ref=e133]
+            - heading "bulbasaur" [level=2] [ref=e134]
+            - generic [ref=e135]: "#0001"
+          - generic [ref=e136]:
+            - generic [ref=e137]: Planta
+            - generic [ref=e138]: Veneno
+        - generic [ref=e140]:
+          - 'heading "ESTADISTICAS (Total: 318)" [level=3] [ref=e141]'
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]: PS
+              - generic [ref=e147]: "45"
+            - generic [ref=e148]:
+              - generic [ref=e149]: Ataque
+              - generic [ref=e152]: "49"
+            - generic [ref=e153]:
+              - generic [ref=e154]: Defensa
+              - generic [ref=e157]: "49"
+            - generic [ref=e158]:
+              - generic [ref=e159]: At. Esp.
+              - generic [ref=e162]: "65"
+            - generic [ref=e163]:
+              - generic [ref=e164]: Def. Esp.
+              - generic [ref=e167]: "65"
+            - generic [ref=e168]:
+              - generic [ref=e169]: Velocidad
+              - generic [ref=e172]: "45"
+      - generic [ref=e173]:
+        - generic [ref=e175]:
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - paragraph [ref=e178]: Peso
+              - paragraph [ref=e179]: 6.9kg
+            - generic [ref=e180]:
+              - paragraph [ref=e181]: Altura
+              - paragraph [ref=e182]: 0.7m
+          - generic [ref=e183]:
+            - heading "HABILIDADES" [level=3] [ref=e184]
+            - generic [ref=e185]:
+              - generic [ref=e186]: overgrow
+              - generic [ref=e187]: chlorophyll(oculta)
+          - generic [ref=e188]:
+            - heading "MOVIMIENTOS (86)" [level=3] [ref=e189]
+            - generic [ref=e190]:
+              - generic [ref=e191]: razor wind
+              - generic [ref=e192]: swords dance
+              - generic [ref=e193]: cut
+              - generic [ref=e194]: bind
+              - generic [ref=e195]: vine whip
+              - generic [ref=e196]: headbutt
+              - generic [ref=e197]: tackle
+              - generic [ref=e198]: body slam
+              - generic [ref=e199]: take down
+              - generic [ref=e200]: double edge
+              - generic [ref=e201]: growl
+              - generic [ref=e202]: strength
+              - generic [ref=e203]: mega drain
+              - generic [ref=e204]: leech seed
+              - generic [ref=e205]: growth
+              - generic [ref=e206]: razor leaf
+              - generic [ref=e207]: solar beam
+              - generic [ref=e208]: poison powder
+              - generic [ref=e209]: sleep powder
+              - generic [ref=e210]: petal dance
+              - generic [ref=e211]: +66 más
+        - generic [ref=e213]:
+          - heading "EVOLUCIONES" [level=3] [ref=e214]
+          - generic [ref=e215]:
+            - generic [ref=e216]:
+              - button "bulbasaur bulbasaur" [ref=e217]:
+                - img "bulbasaur" [ref=e218]
+                - generic [ref=e219]: bulbasaur
+              - generic [ref=e220]: →
+            - generic [ref=e221]:
+              - button "ivysaur ivysaur" [ref=e222]:
+                - img "ivysaur" [ref=e223]
+                - generic [ref=e224]: ivysaur
+              - generic [ref=e225]: →
+            - button "venusaur venusaur" [ref=e227]:
+              - img "venusaur" [ref=e228]
+              - generic [ref=e229]: venusaur
