@@ -24,6 +24,17 @@
     overflow: hidden;
   }
 
+  #root:empty::after {
+    content: 'Cargando...';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 14px;
+  }
+
   body {
     margin: 0;
     position: relative;
