@@ -61,9 +61,9 @@ export default function App() {
 
   if (currentView !== 'pokedex') {
     return (
-        <div style={{ display: 'flex', height: '100dvh' }}>
-        <HomeScreen onSelectRegion={setSelectedGeneration} />
-      </div>
+        <div style={{ display: 'flex', height: '100vh' }}>
+          <HomeScreen onSelectRegion={setSelectedGeneration} />
+        </div>
     )
   }
 
@@ -74,7 +74,7 @@ export default function App() {
   const sidebarOpen = bp !== 'xs' || showMobileFavs
 
   return (
-    <div style={{ display: 'flex', height: '100dvh' }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       {sidebarOpen && !isMobile && (
         <aside
           style={{
@@ -141,7 +141,7 @@ export default function App() {
             onClick={(e) => e.stopPropagation()}
             style={{
               position: 'fixed', left: 0, top: 0, bottom: 0,
-              width: 260, padding: 'calc(env(safe-area-inset-top, 0px) + 24px) 16px 24px',
+              width: 260, padding: '24px 16px',
               background: 'rgba(18,18,22,0.95)',
               borderRight: '1px solid rgba(255,255,255,0.12)',
               backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
@@ -191,7 +191,7 @@ export default function App() {
             height: '100%', overflow: 'hidden',
         }}
       >
-        <header style={{ padding: `calc(env(safe-area-inset-top, 0px) + ${isMobile ? 16 : 28}px) ${isMobile ? 16 : 36}px ${isMobile ? 12 : 20}px`, display: 'flex', flexDirection: 'column', gap: isMobile ? 8 : 16 }}>
+        <header style={{ padding: `${isMobile ? 16 : 28}px ${isMobile ? 16 : 36}px ${isMobile ? 12 : 20}px`, display: 'flex', flexDirection: 'column', gap: isMobile ? 8 : 16 }}>
           <div style={{ display: 'flex', gap: isMobile ? 8 : 12, alignItems: 'center' }}>
             <button
               onClick={() => usePokedexStore.setState({ currentView: 'home', selectedGeneration: '' })}
