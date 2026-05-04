@@ -1,7 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import useBreakpoint from '../hooks/useBreakpoint'
-import CleanLogo from './ui/CleanLogo'
 
 const STARTERS = [
   [1, 4, 7],
@@ -41,64 +39,37 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
-function StarterSprite({ id, size = 72 }) {
+function StarterSprite({ id }) {
   const [src, setSrc] = useState(ART(id))
   return (
-    <div
-      style={{
-        width: size, height: size, borderRadius: '50%',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 65%)',
-      }}
-    >
-      <img
-        src={src}
-        alt=""
-        style={{ width: size - 4, height: size - 4, objectFit: 'contain', filter: 'drop-shadow(0 3px 8px rgba(0,0,0,0.4))' }}
-        onError={() => setSrc(FALL(id))}
-      />
+    <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 65%)' }}>
+      <img src={src} alt="" style={{ width: 60, height: 60, objectFit: 'contain', filter: 'drop-shadow(0 3px 8px rgba(0,0,0,0.4))' }} onError={() => setSrc(FALL(id))} />
     </div>
   )
 }
 
 export default function HomeScreen({ onSelectRegion }) {
-  const bp = useBreakpoint()
-  const isMobile = bp === 'xs'
-  const isTablet = bp === 'sm'
-
-  const cols = isMobile ? 2 : isTablet ? 3 : 5
-  const cardPad = isMobile ? '16px 8px 14px' : isTablet ? '20px 10px 16px' : '24px 14px 20px'
-  const cardWidth = isMobile ? '100%' : isTablet ? 200 : 240
-  const cardGap = isMobile ? 10 : isTablet ? 16 : 22
-  const logoW = isMobile ? 'clamp(180px, 70vw, 280px)' : 360
-  const spriteSz = isMobile ? 50 : isTablet ? 60 : 72
-  const titleSz = isMobile ? 32 : isTablet ? 40 : 48
-  const subtitleSz = isMobile ? 13 : 16
-  const nameSz = isMobile ? 16 : isTablet ? 18 : 22
-
   return (
     <AnimatePresence>
-      <motion.div
-        key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '20px 12px' : '36px 56px', overflowY: 'auto' }}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', overflowY: 'auto' }}
       >
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: isMobile ? 24 : 36, textAlign: 'center' }}
+          transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: 28, textAlign: 'center' }}
         >
-          <CleanLogo
+          <img
             src={`${BASE}pokemon-logo.png`}
-            width={typeof logoW === 'number' ? logoW : undefined}
-            style={{ marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))', maxWidth: '100%' }}
-            responsive={typeof logoW === 'string' ? logoW : undefined}
+            alt="Pokémon"
+            style={{ width: 'min(320px, 80vw)', marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))' }}
           />
-          <p style={{ fontSize: subtitleSz, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0', fontWeight: 500 }}>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0', fontWeight: 500 }}>
             Selecciona una región para explorar
           </p>
         </motion.div>
 
         <motion.div variants={containerVariants} initial="hidden" animate="visible"
-          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: cardGap, maxWidth: 1200, width: '100%' }}
+          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16, maxWidth: 1100, width: '100%' }}
         >
           {REGIONS.map((r, gi) => (
             <motion.button
@@ -107,82 +78,55 @@ export default function HomeScreen({ onSelectRegion }) {
               whileTap={{ scale: 0.97 }}
               onClick={() => onSelectRegion(r.roman)}
               style={{
-                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobile ? 8 : 12,
-                width: cardWidth, flex: isMobile ? '1 1 140px' : '0 0 auto',
-                padding: cardPad, borderRadius: 24,
-                background: 'rgba(255,255,255,0.035)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+                flex: '1 1 180px', maxWidth: 240, padding: '20px 12px 18px', borderRadius: 24,
+                background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.4)', cursor: 'pointer',
                 color: '#fff', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = r.color + '55'
-                e.currentTarget.style.boxShadow = `0 16px 48px ${r.color}18`
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)'
-              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = r.color + '55'; e.currentTarget.style.boxShadow = `0 16px 48px ${r.color}18` }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)' }}
             >
-              <div style={{ display: 'flex', gap: isMobile ? 3 : 6, alignItems: 'center', justifyContent: 'center' }}>
-                {STARTERS[gi].map((sid) => (
-                  <StarterSprite key={sid} id={sid} size={spriteSz} />
-                ))}
+              <div style={{ display: 'flex', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+                {STARTERS[gi].map((sid) => <StarterSprite key={sid} id={sid} />)}
               </div>
               <div style={{ textAlign: 'center' }}>
-                <span style={{ display: 'block', fontSize: isMobile ? 9 : 11, fontWeight: 700, color: r.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 2 }}>
-                  {r.gen}
-                </span>
-                <span style={{ display: 'block', fontSize: nameSz, fontWeight: 800 }}>
-                  {r.name}
-                </span>
-                <span style={{ display: 'block', fontSize: isMobile ? 10 : 12, color: 'rgba(255,255,255,0.28)', marginTop: 2 }}>
-                  #{r.start} – #{r.end}
-                </span>
+                <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 2 }}>{r.gen}</span>
+                <span style={{ display: 'block', fontSize: 20, fontWeight: 800 }}>{r.name}</span>
+                <span style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.28)', marginTop: 2 }}>#{r.start} – #{r.end}</span>
               </div>
             </motion.button>
           ))}
 
           <motion.button
-            variants={cardVariants}
-            whileHover={{ scale: 1.04, y: -4 }}
-            whileTap={{ scale: 0.97 }}
+            variants={cardVariants} whileHover={{ scale: 1.04, y: -4 }} whileTap={{ scale: 0.97 }}
             onClick={() => onSelectRegion('')}
             style={{
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: isMobile ? 8 : 12,
-              width: cardWidth, flex: isMobile ? '1 1 140px' : '0 0 auto',
-              padding: cardPad, borderRadius: 24,
-              background: 'rgba(255,255,255,0.035)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10,
+              flex: '1 1 180px', maxWidth: 240, padding: '20px 12px 18px', borderRadius: 24,
+              background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.1)',
               backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
               boxShadow: '0 8px 32px rgba(0,0,0,0.4)', cursor: 'pointer',
-              color: '#fff', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-              minHeight: isMobile ? 190 : 272,
+              color: '#fff', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", minHeight: 210,
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'
-              e.currentTarget.style.boxShadow = '0 16px 48px rgba(255,255,255,0.04)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
-              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)'
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(255,255,255,0.04)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)' }}
           >
-            <div style={{ display: 'flex', gap: isMobile ? 3 : 6, alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: spriteSz, height: spriteSz, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)' }}>
-                <img src={`${BASE}pokeball.png`} alt="" style={{ width: spriteSz - 16, height: spriteSz - 16, objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
+            <div style={{ display: 'flex', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)' }}>
+                <img src={`${BASE}pokeball.png`} alt="" style={{ width: 48, height: 48, objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
               </div>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: isMobile ? 9 : 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 2 }}>Todas</span>
-              <span style={{ display: 'block', fontSize: nameSz, fontWeight: 800 }}>Nacional</span>
-              <span style={{ display: 'block', fontSize: isMobile ? 10 : 12, color: 'rgba(255,255,255,0.28)', marginTop: 2 }}>#1 – #1025</span>
+              <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 2 }}>Todas</span>
+              <span style={{ display: 'block', fontSize: 20, fontWeight: 800 }}>Nacional</span>
+              <span style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.28)', marginTop: 2 }}>#1 – #1025</span>
             </div>
           </motion.button>
         </motion.div>
 
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', marginTop: isMobile ? 24 : 40, textAlign: 'center' }}>
+        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', marginTop: 28, textAlign: 'center' }}>
           Desarrollado por Ismael Manzano León
         </p>
       </motion.div>

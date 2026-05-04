@@ -5,9 +5,8 @@ import { motion } from 'framer-motion'
 import { useQueryClient } from '@tanstack/react-query'
 import { fetchPokemonDetail } from '../../services/pokeApi'
 
-export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, onSelect, hovered, onHover, isMobile = false }) {
+export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, onSelect, hovered, onHover }) {
   const h = hovered === pokemon.id
-  const sz = isMobile ? 80 : 128
   const queryClient = useQueryClient()
 
   const handleMouseEnter = () => {
@@ -30,47 +29,42 @@ export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, o
       style={{
         background: 'rgba(255,255,255,0.04)',
         border: '1px solid rgba(255,255,255,0.18)',
-        borderRadius: isMobile ? 18 : 24,
-        padding: isMobile ? '14px 8px 12px' : '24px 16px 20px',
-        boxShadow: h
-          ? '0 16px 48px rgba(0,0,0,0.55)'
-          : '0 8px 32px 0 rgba(0,0,0,0.4)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        transition: 'transform .25s, box-shadow .25s',
+        borderRadius: 20,
+        padding: '16px 10px 14px',
+        boxShadow: h ? '0 16px 48px rgba(0,0,0,0.55)' : '0 8px 32px 0 rgba(0,0,0,0.4)',
+        backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
         transform: h ? 'translateY(-6px)' : 'none',
       }}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggleFav(pokemon.id) }}
         className="absolute bg-transparent border-0 cursor-pointer transition-all"
-        style={{ top: isMobile ? 8 : 14, right: isMobile ? 8 : 14, opacity: isFav ? 1 : 0.55 }}
+        style={{ top: 10, right: 10, opacity: isFav ? 1 : 0.55 }}
         title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
       >
-        <RetroHeart filled={isFav} size={isMobile ? 18 : 24} />
+        <RetroHeart filled={isFav} size={20} />
       </button>
 
       <SpriteImg
         id={pokemon.id}
-        size={sz}
+        size={100}
         style={{
-          marginTop: -16,
+          marginTop: -14,
           filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.5))',
-          transition: 'transform .3s',
           transform: h ? 'scale(1.08)' : 'none',
         }}
       />
 
-      <span className="text-xs font-bold text-white/60" style={{ fontSize: isMobile ? 10 : 12 }}>
+      <span className="text-xs font-bold text-white/60" style={{ fontSize: 11 }}>
         #{String(pokemon.id).padStart(3, '0')}
       </span>
-      <span className="text-base font-bold capitalize text-white text-center" style={{ fontSize: isMobile ? 13 : 17 }}>
+      <span className="text-base font-bold capitalize text-white text-center" style={{ fontSize: 14 }}>
         {pokemon.name.replace(/-/g, ' ')}
       </span>
       {types.length > 0 && (
-        <div className="flex flex-wrap justify-center" style={{ gap: isMobile ? 3 : 6 }}>
+        <div className="flex flex-wrap justify-center" style={{ gap: 4 }}>
           {types.map((t) => (
-            <TypeBadge key={t} type={t} size={isMobile ? 'sm' : 'md'} />
+            <TypeBadge key={t} type={t} size="sm" />
           ))}
         </div>
       )}

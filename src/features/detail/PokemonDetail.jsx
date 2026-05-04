@@ -18,7 +18,7 @@ function parseIdFromUrl(url) {
   return Number(url.split('/').filter(Boolean).pop())
 }
 
-export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, onSelectPokemon, isMobile = false }) {
+export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, onSelectPokemon }) {
   if (!pokemon) return null
 
   const [isShiny, setIsShiny] = useState(false)
@@ -96,11 +96,11 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           style={{
             background: 'rgba(20,20,25,0.92)',
             border: '1px solid rgba(255,255,255,0.15)',
-            borderRadius: isMobile ? 20 : 32,
-            padding: isMobile ? 20 : 40,
+            borderRadius: 24,
+            padding: 28,
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            maxWidth: isMobile ? '100vw' : 700,
+            maxWidth: 700,
             maxHeight: '92vh',
             overflowY: 'auto',
             display: 'flex',
@@ -135,10 +135,10 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           {/* ── Header: sprite + name + category ── */}
           <div
             style={{
-              width: isMobile ? 140 : 200, height: isMobile ? 140 : 200, borderRadius: '50%',
+              width: 180, height: 180, borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               background: `radial-gradient(circle, ${primaryColor}22 0%, transparent 70%)`,
-              marginTop: isMobile ? -12 : -20,
+              marginTop: -16,
             }}
           >
             <AnimatePresence mode="wait">
@@ -153,9 +153,9 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
             <SpriteImg
               id={pokemon.id}
               sprites={detail?.sprites}
-              size={isMobile ? 140 : 200}
+              size={180}
               isShiny={isShiny}
-              style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: isMobile ? 120 : 180, height: isMobile ? 120 : 180 }}
+              style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: 160, height: 160 }}
             />
               </motion.div>
             </AnimatePresence>
@@ -165,7 +165,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
             #{String(pokemon.id).padStart(3, '0')}
           </span>
 
-          <span style={{ fontSize: isMobile ? 18 : 26, fontWeight: 800, textTransform: 'capitalize', overflowWrap: 'break-word', textAlign: 'center' }}>
+          <span style={{ fontSize: 24, fontWeight: 800, textTransform: 'capitalize', overflowWrap: 'break-word', textAlign: 'center' }}>
             {pokemon.name.replace(/-/g, ' ')}
           </span>
 
@@ -192,7 +192,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           </button>
 
           {/* ── Info grid 4 cols ── */}
-          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: isMobile ? 8 : 10 }}>
+          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
             {[
               { label: 'Altura', value: `${(height / 10).toFixed(1)} m` },
               { label: 'Peso', value: `${(weight / 10).toFixed(1)} kg` },
@@ -363,9 +363,9 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
                     <span
                       key={m.move.name}
                       style={{
-                        padding: isMobile ? '3px 8px' : '4px 10px',
+                        padding: '4px 10px',
                         borderRadius: 999,
-                        fontSize: isMobile ? 10 : 11,
+                        fontSize: 11,
                         maxWidth: '100%',
                         overflowWrap: 'break-word',
                         textTransform: 'capitalize',
