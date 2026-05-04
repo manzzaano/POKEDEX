@@ -2,16 +2,28 @@ import RetroHeart from './RetroHeart'
 import TypeBadge from './TypeBadge'
 import SpriteImg from './SpriteImg'
 import { motion } from 'framer-motion'
+import { useQueryClient } from '@tanstack/react-query'
+import { fetchPokemonDetail } from '../../services/pokeApi'
 
 export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, onSelect, hovered, onHover, isMobile = false }) {
   const h = hovered === pokemon.id
   const sz = isMobile ? 80 : 128
+  const queryClient = useQueryClient()
+
+  const handleMouseEnter = () => {
+    onHover?.(pokemon.id)
+    queryClient.prefetchQuery({
+      queryKey: ['pokemon-detail', pokemon.name],
+      queryFn: () => fetchPokemonDetail(pokemon.name),
+      staleTime: 1000 * 60 * 30,
+    })
+  }
 
   return (
     <motion.div
       whileHover={{ y: -4, boxShadow: '0 14px 40px rgba(0,0,0,0.5)' }}
       whileTap={{ scale: 0.98 }}
-      onMouseEnter={() => onHover?.(pokemon.id)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => onHover?.(null)}
       onClick={() => onSelect(pokemon.name)}
       className="relative cursor-pointer flex flex-col items-center gap-2"

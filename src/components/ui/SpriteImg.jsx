@@ -1,54 +1,79 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const PLACEHOLDER = 'data:image/svg+xml,' + encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/><text x="100" y="108" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="48">?</text></svg>'
 )
 
-export default function SpriteImg({ id, sprites, size = 200, isShiny = false, style, ...props }) {
-  const [tier, setTier] = useState(0)
+export default function SpriteImg({ id, sprites, size = 200, isShiny = false, style, onLoad, ...props }) {
+  const [phase, setPhase] = useState('loading')
   const [src, setSrc] = useState('')
+  const hiResLoaded = useRef(false)
 
   useEffect(() => {
-    setTier(0)
+    setPhase('loading')
+    hiResLoaded.current = false
+
     const art = sprites?.other?.['official-artwork']
     const home = sprites?.other?.home
-    let initial
-    if (isShiny) {
-      initial = art?.front_shiny
-        || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`
-    } else {
-      initial = art?.front_default
-        || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
-    }
-    setSrc(initial || PLACEHOLDER)
-  }, [id, isShiny, sprites])
-
-  const handleError = () => {
-    const art = sprites?.other?.['official-artwork']
-    const home = sprites?.other?.home
-    const next = tier + 1
-    setTier(next)
+    const front = sprites?.front_default
+    const frontShiny = sprites?.front_shiny
 
     if (isShiny) {
-      if (next === 1) setSrc(home?.front_shiny || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${id}.png`)
-      else if (next === 2) setSrc(sprites?.front_shiny || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`)
-      else setSrc(PLACEHOLDER)
+      const lowSrc = frontShiny || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
+      const img = new Image()
+      img.onload = () => { setSrc(lowSrc); setPhase('lowres'); loadHiRes() }
+      img.onerror = () => { setSrc(PLACEHOLDER); setPhase('lowres') }
+      img.src = lowSrc
     } else {
-      if (next === 1) setSrc(home?.front_default || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`)
-      else if (next === 2) setSrc(sprites?.front_default || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`)
-      else setSrc(PLACEHOLDER)
+      const lowSrc = front || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+      const img = new Image()
+      img.onload = () => { setSrc(lowSrc); setPhase('lowres'); loadHiRes() }
+      img.onerror = () => { setSrc(PLACEHOLDER); setPhase('lowres') }
+      img.src = lowSrc
     }
-  }
+
+    function loadHiRes() {
+      let hiSrc
+      if (isShiny) {
+        hiSrc = art?.front_shiny
+          || home?.front_shiny
+          || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`
+      } else {
+        hiSrc = art?.front_default
+          || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+      }
+      const hi = new Image()
+      hi.onload = () => {
+        if (!hiResLoaded.current) {
+          hiResLoaded.current = true
+          setSrc(hiSrc)
+          setPhase('hires')
+          onLoad?.()
+        }
+      }
+      hi.onerror = () => {
+        if (!hiResLoaded.current) {
+          hiResLoaded.current = true
+          setPhase('hires')
+          onLoad?.()
+        }
+      }
+      hi.src = hiSrc
+    }
+  }, [id, isShiny])
 
   return (
     <img
-      src={src}
+      src={src || PLACEHOLDER}
       alt=""
-      onError={handleError}
       width={size}
       height={size}
-      loading="lazy"
-      style={{ objectFit: 'contain', ...style }}
+      style={{
+        objectFit: 'contain',
+        transition: 'opacity 0.35s ease',
+        opacity: phase === 'hires' ? 1 : phase === 'lowres' ? 0.55 : 0,
+        ...style,
+      }}
       {...props}
     />
   )
