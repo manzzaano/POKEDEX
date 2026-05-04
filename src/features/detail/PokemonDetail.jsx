@@ -114,7 +114,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           <button
             onClick={onClose}
             style={{
-              position: 'absolute', top: 'calc(env(safe-area-inset-top, 0px) + 18px)', right: 22,
+              position: 'absolute', top: 18, right: 22,
               background: 'none', border: 'none', color: '#fff',
               fontSize: 22, cursor: 'pointer', opacity: 0.5,
               zIndex: 10,
@@ -126,7 +126,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           <button
             onClick={() => setIsShiny((s) => !s)}
             className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110"
-            style={{ top: 'calc(env(safe-area-inset-top, 0px) + 21px)', right: 58, opacity: isShiny ? 1 : 0.55 }}
+            style={{ top: 21, right: 58, opacity: isShiny ? 1 : 0.55 }}
             title={isShiny ? 'Ver normal' : 'Ver shiny'}
           >
             <ShinyIcon active={isShiny} size={22} />
@@ -185,7 +185,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           <button
             onClick={() => onToggleFav(pokemon.id)}
             className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110"
-            style={{ top: 'calc(env(safe-area-inset-top, 0px) + 22px)', left: 22, opacity: isFav ? 1 : 0.55 }}
+            style={{ top: 22, left: 22, opacity: isFav ? 1 : 0.55 }}
             title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           >
             <RetroHeart filled={isFav} size={28} />
