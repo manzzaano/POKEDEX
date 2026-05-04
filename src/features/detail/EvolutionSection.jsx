@@ -49,7 +49,7 @@ export default function EvolutionSection({ chain, pokemonId, onSelect }) {
                 style={{ display: 'flex', alignItems: 'center', gap: 8 }}
               >
                 {i > 0 && (
-                  <span style={{ fontSize: 22, color: 'rgba(255,255,255,0.25)', fontWeight: 700 }}>›</span>
+                  <span style={{ fontSize: 18, color: 'rgba(255,255,255,0.25)', fontWeight: 700 }}>›</span>
                 )}
                 <motion.button
                   whileHover={{ scale: 1.06 }}

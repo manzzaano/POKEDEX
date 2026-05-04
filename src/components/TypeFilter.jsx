@@ -12,16 +12,17 @@ export default function TypeFilter() {
       <span
         onClick={() => setSelectedType('')}
         style={{
-          padding: '6px 16px',
-          borderRadius: 9999,
-          fontSize: 13,
-          fontWeight: 600,
-          cursor: 'pointer',
-          border: '1px solid rgba(255,255,255,0.12)',
-          transition: 'all .2s',
-          background: selectedType === '' ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.06)',
-          color: selectedType === '' ? '#fff' : 'rgba(255,255,255,0.6)',
-          userSelect: 'none',
+        padding: '8px 16px',
+        borderRadius: 9999,
+        fontSize: 13,
+        fontWeight: 700,
+        cursor: 'pointer',
+        border: '1px solid rgba(255,255,255,0.12)',
+        transition: 'all .2s',
+        background: selectedType === '' ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.06)',
+        color: selectedType === '' ? '#fff' : 'rgba(255,255,255,0.6)',
+        userSelect: 'none',
+        minHeight: 36,
         }}
       >
         Todos
@@ -34,10 +35,11 @@ export default function TypeFilter() {
             key={t.name}
             onClick={() => setSelectedType(active ? '' : t.name)}
             style={{
-              padding: '6px 16px',
-              borderRadius: 9999,
-              fontSize: 13,
-              fontWeight: 600,
+            padding: '8px 16px',
+            borderRadius: 9999,
+            fontSize: 13,
+            fontWeight: 700,
+            minHeight: 36,
               cursor: 'pointer',
               border: active
                 ? `1px solid ${color}55`

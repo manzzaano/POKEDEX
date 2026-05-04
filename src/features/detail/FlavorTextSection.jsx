@@ -28,15 +28,11 @@ export default function FlavorTextSection({ entries = [] }) {
               key={v}
               onClick={() => setActive(v)}
               style={{
-                width: 12,
-                height: 12,
-                borderRadius: '50%',
-                border: '1.5px solid',
+                width: 18, height: 18, borderRadius: '50%',
+                border: '2px solid',
                 borderColor: v === active ? '#ef4444' : 'rgba(255,255,255,0.3)',
                 background: v === active ? '#ef4444' : 'transparent',
-                cursor: 'pointer',
-                transition: 'all .2s',
-                padding: 0,
+                cursor: 'pointer', transition: 'all .2s', padding: 0,
               }}
             />
           ))}

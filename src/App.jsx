@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Search, ArrowLeft } from 'lucide-react'
+import { Search, ArrowLeft, Star } from 'lucide-react'
 import usePokemons from './hooks/usePokemons'
 import useFavorites from './hooks/useFavorites'
 import usePokedexStore from './store/usePokedexStore'
+import useBreakpoint from './hooks/useBreakpoint'
 import TypeFilter from './components/TypeFilter'
 import HomeScreen from './components/HomeScreen'
 import PokemonCard from './components/ui/PokemonCard'
@@ -25,6 +26,7 @@ const GENERATIONS = [
 const REGION_NAMES = Object.fromEntries(GENERATIONS.map((g) => [g.roman, g.name]))
 
 export default function App() {
+  const bp = useBreakpoint()
   const { pokemons, allPokemons, isLoading } = usePokemons()
   const { favs, toggle, isFav } = useFavorites()
   const currentView = usePokedexStore((s) => s.currentView)
@@ -37,6 +39,7 @@ export default function App() {
 
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedDetail, setSelectedDetail] = useState(null)
+  const [showMobileFavs, setShowMobileFavs] = useState(false)
 
   useEffect(() => {
     if (selectedPokemonName) {
@@ -58,189 +61,229 @@ export default function App() {
 
   if (currentView !== 'pokedex') {
     return (
-      <div style={{ display: 'flex', height: '100vh' }}>
+        <div style={{ display: 'flex', height: '100dvh' }}>
         <HomeScreen onSelectRegion={setSelectedGeneration} />
       </div>
     )
   }
 
+  const isMobile = bp === 'xs'
+  const padding = isMobile ? 16 : 36
+  const titleSize = isMobile ? 20 : 28
+  const gridCols = bp === 'xs' ? 2 : bp === 'sm' ? 3 : 4
+  const sidebarOpen = bp !== 'xs' || showMobileFavs
+
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <aside
-        style={{
-          width: 260,
-          minWidth: 260,
-          height: '100%',
-          padding: '28px 20px',
-          background: 'rgba(255,255,255,0.04)',
-          borderRight: '1px solid rgba(255,255,255,0.12)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 16,
-          overflowY: 'auto',
-        }}
-      >
-        <span
+    <div style={{ display: 'flex', height: '100dvh' }}>
+      {sidebarOpen && !isMobile && (
+        <aside
           style={{
-            fontSize: 13,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.12em',
-            color: 'rgba(255,255,255,0.6)',
-            marginBottom: 4,
+            width: bp === 'sm' ? 200 : 260,
+            minWidth: bp === 'sm' ? 200 : 260,
+            height: '100%',
+            padding: bp === 'sm' ? '20px 14px' : '28px 20px',
+            background: 'rgba(255,255,255,0.04)',
+            borderRight: '1px solid rgba(255,255,255,0.12)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+            overflowY: 'auto',
           }}
         >
-          ★ Favoritos ({favList.length})
-        </span>
-        {favList.length === 0 && (
-          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-            Haz clic en el corazón de una tarjeta para agregar favoritos.
+          <span style={{
+            fontSize: 12, fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '0.12em', color: 'rgba(255,255,255,0.6)', marginBottom: 4,
+          }}>
+            ★ Favoritos ({favList.length})
           </span>
-        )}
-        {favList.map((p) => (
-          <div
-            key={p.id}
-            onClick={() => selectPokemon(p.name)}
+          {favList.length === 0 && (
+            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+              Haz clic en el corazón de una tarjeta para agregar favoritos.
+            </span>
+          )}
+          {favList.map((p) => (
+            <div
+              key={p.id}
+              onClick={() => { selectPokemon(p.name); if (isMobile) setShowMobileFavs(false) }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '8px 10px', borderRadius: 14,
+                background: 'rgba(255,255,255,0.04)', cursor: 'pointer',
+                transition: 'background .2s',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              <SpriteImg id={p.id} size={bp === 'sm' ? 30 : 36} style={{ borderRadius: '50%' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+                <span style={{ fontSize: bp === 'sm' ? 12 : 14, fontWeight: 600, textTransform: 'capitalize', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {p.name.replace(/-/g, ' ')}
+                </span>
+                <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)' }}>
+                  #{String(p.id).padStart(3, '0')}
+                </span>
+              </div>
+            </div>
+          ))}
+          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.1)', textAlign: 'center', marginTop: 'auto', paddingTop: 16 }}>
+            Ismael Manzano León
+          </span>
+        </aside>
+      )}
+
+      {showMobileFavs && isMobile && (
+        <div
+          onClick={() => setShowMobileFavs(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 50 }}
+        >
+          <aside
+            onClick={(e) => e.stopPropagation()}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              padding: '8px 12px',
-              borderRadius: 14,
-              background: 'rgba(255,255,255,0.04)',
-              cursor: 'pointer',
-              transition: 'background .2s',
-              border: '1px solid rgba(255,255,255,0.06)',
+              position: 'fixed', left: 0, top: 0, bottom: 0,
+              width: 260, padding: '24px 16px',
+              background: 'rgba(18,18,22,0.95)',
+              borderRight: '1px solid rgba(255,255,255,0.12)',
+              backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+              display: 'flex', flexDirection: 'column', gap: 12,
+              overflowY: 'auto', zIndex: 51,
             }}
           >
-            <SpriteImg id={p.id} size={36} style={{ borderRadius: '50%' }} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <span style={{ fontSize: 14, fontWeight: 600, textTransform: 'capitalize' }}>
-                {p.name.replace(/-/g, ' ')}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.6)' }}>
+                ★ Favoritos
               </span>
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-                #{String(p.id).padStart(3, '0')}
-              </span>
+              <button onClick={() => setShowMobileFavs(false)} style={{ background: 'none', border: 'none', color: '#fff', fontSize: 18, cursor: 'pointer', opacity: 0.5 }}>✕</button>
             </div>
-          </div>
-        ))}
-      </aside>
+            {favList.length === 0 && (
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+                Haz clic en el corazón de una tarjeta para agregar favoritos.
+              </span>
+            )}
+            {favList.map((p) => (
+              <div
+                key={p.id}
+                onClick={() => { selectPokemon(p.name); setShowMobileFavs(false) }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px',
+                  borderRadius: 14, background: 'rgba(255,255,255,0.04)', cursor: 'pointer',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                }}
+              >
+                <SpriteImg id={p.id} size={36} style={{ borderRadius: '50%' }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+                  <span style={{ fontSize: 14, fontWeight: 600, textTransform: 'capitalize', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {p.name.replace(/-/g, ' ')}
+                  </span>
+                  <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)' }}>
+                    #{String(p.id).padStart(3, '0')}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </aside>
+        </div>
+      )}
 
       <main
         style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          overflow: 'hidden',
+          flex: 1, display: 'flex', flexDirection: 'column',
+            height: '100%', overflow: 'hidden',
         }}
       >
-        <header
-          style={{
-            padding: '28px 36px 20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-          }}
-        >
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <header style={{ padding: isMobile ? '16px 16px 12px' : '28px 36px 20px', display: 'flex', flexDirection: 'column', gap: isMobile ? 8 : 16 }}>
+          <div style={{ display: 'flex', gap: isMobile ? 8 : 12, alignItems: 'center' }}>
             <button
               onClick={() => usePokedexStore.setState({ currentView: 'home', selectedGeneration: '' })}
               style={{
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 9999,
-                padding: '8px 12px',
-                color: 'rgba(255,255,255,0.6)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 9999, padding: isMobile ? '6px 8px' : '8px 12px',
+                color: 'rgba(255,255,255,0.6)', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: 4,
                 fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                fontSize: 12,
-                fontWeight: 600,
+                fontSize: isMobile ? 10 : 12, fontWeight: 600,
               }}
             >
-              <ArrowLeft size={14} />
+              <ArrowLeft size={isMobile ? 12 : 14} />
             </button>
-            <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
+            <h1 style={{ fontSize: titleSize, fontWeight: 800, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
               Pokédex
               {selectedGeneration && (
-                <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 6px' }}>·</span>
+                <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 4px' }}>·</span>
               )}
               {selectedGeneration && (
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, fontSize: isMobile ? 14 : 20 }}>
                   {REGION_NAMES[selectedGeneration]}
                 </span>
               )}
             </h1>
             <div style={{ flex: 1, position: 'relative' }}>
               <Search
-                size={16}
+                size={isMobile ? 14 : 16}
                 style={{
-                  position: 'absolute', left: 16, top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'rgba(255,255,255,0.35)',
-                  pointerEvents: 'none',
+                  position: 'absolute', left: isMobile ? 10 : 16, top: '50%',
+                  transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.35)', pointerEvents: 'none',
                 }}
               />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar por nombre o número…"
+                placeholder="Buscar…"
                 style={{
-                  width: '100%',
-                  background: 'rgba(0,0,0,0.3)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  borderRadius: 9999,
-                  padding: '14px 24px 14px 42px',
-                  color: '#fff',
-                  fontSize: 15,
-                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                  outline: 'none',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
+                  width: '100%', background: 'rgba(0,0,0,0.3)',
+                  border: '1px solid rgba(255,255,255,0.12)', borderRadius: 9999,
+                  padding: isMobile ? '12px 12px 12px 28px' : '14px 24px 14px 42px',
+                  color: '#fff', fontSize: isMobile ? 13 : 15,
+                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", outline: 'none',
+                  backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
                 }}
               />
             </div>
+            {isMobile && (
+              <button
+                onClick={() => setShowMobileFavs(true)}
+                style={{
+                  background: favList.length > 0 ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)', borderRadius: 9999,
+                  padding: '8px 10px', color: favList.length > 0 ? '#ef4444' : 'rgba(255,255,255,0.6)',
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4,
+                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+                  fontSize: 11, fontWeight: 600,
+                }}
+              >
+                <Star size={14} fill={favList.length > 0 ? '#ef4444' : 'transparent'} />
+                {favList.length}
+              </button>
+            )}
           </div>
           <TypeFilter />
         </header>
 
         <div
           style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: '8px 36px 36px',
+            flex: 1, overflowY: 'auto',
+            padding: isMobile ? '4px 12px 24px' : '8px 36px 36px',
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 24,
-            alignContent: 'start',
+            gridTemplateColumns: `repeat(${gridCols}, 1fr)`,
+            gap: isMobile ? 12 : 24, alignContent: 'start',
           }}
         >
           {isLoading
-            ? Array.from({ length: 16 }).map((_, i) => (
+            ? Array.from({ length: gridCols * 4 }).map((_, i) => (
                 <div
                   key={i}
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.18)',
-                    borderRadius: 24,
-                    padding: 24,
-                    backdropFilter: 'blur(16px)',
-                    WebkitBackdropFilter: 'blur(16px)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: 12,
+                    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.18)',
+                    borderRadius: isMobile ? 18 : 24,
+                    padding: isMobile ? 12 : 24,
+                    backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobile ? 8 : 12,
                   }}
                 >
-                  <Skeleton width="120px" height="120px" rounded="rounded-2xl" />
-                  <Skeleton width="60px" height="14px" />
-                  <Skeleton width="90px" height="18px" />
+                  <Skeleton width={isMobile ? '80px' : '120px'} height={isMobile ? '80px' : '120px'} rounded="rounded-2xl" />
+                  <Skeleton width={isMobile ? '40px' : '60px'} height="14px" />
+                  <Skeleton width={isMobile ? '60px' : '90px'} height="18px" />
                 </div>
               ))
             : pokemons.map((p) => (
@@ -253,16 +296,15 @@ export default function App() {
                   onSelect={selectPokemon}
                   hovered={hoveredId === p.id}
                   onHover={setHoveredId}
+                  isMobile={bp === 'xs'}
                 />
               ))}
           {!isLoading && pokemons.length === 0 && (
             <div
               style={{
-                gridColumn: '1 / -1',
-                textAlign: 'center',
-                padding: 60,
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: 16,
+                gridColumn: '1 / -1', textAlign: 'center',
+                padding: isMobile ? 32 : 60,
+                color: 'rgba(255,255,255,0.6)', fontSize: isMobile ? 14 : 16,
               }}
             >
               No se encontraron Pokémon.
@@ -278,6 +320,7 @@ export default function App() {
           isFav={isFav(selectedDetail.id)}
           onToggleFav={toggle}
           onSelectPokemon={selectPokemon}
+          isMobile={bp === 'xs'}
         />
       )}
     </div>

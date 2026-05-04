@@ -18,7 +18,7 @@ function parseIdFromUrl(url) {
   return Number(url.split('/').filter(Boolean).pop())
 }
 
-export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, onSelectPokemon }) {
+export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, onSelectPokemon, isMobile = false }) {
   if (!pokemon) return null
 
   const [isShiny, setIsShiny] = useState(false)
@@ -96,12 +96,11 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           style={{
             background: 'rgba(20,20,25,0.92)',
             border: '1px solid rgba(255,255,255,0.15)',
-            borderRadius: 32,
-            padding: 40,
+            borderRadius: isMobile ? 20 : 32,
+            padding: isMobile ? 20 : 40,
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            width: 700,
-            maxWidth: '95vw',
+            maxWidth: isMobile ? '100vw' : 700,
             maxHeight: '92vh',
             overflowY: 'auto',
             display: 'flex',
@@ -136,10 +135,10 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           {/* ── Header: sprite + name + category ── */}
           <div
             style={{
-              width: 200, height: 200, borderRadius: '50%',
+              width: isMobile ? 140 : 200, height: isMobile ? 140 : 200, borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               background: `radial-gradient(circle, ${primaryColor}22 0%, transparent 70%)`,
-              marginTop: -20,
+              marginTop: isMobile ? -12 : -20,
             }}
           >
             <AnimatePresence mode="wait">
@@ -151,13 +150,13 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 style={{ display: 'flex' }}
               >
-                <SpriteImg
-                  id={pokemon.id}
-                  sprites={detail?.sprites}
-                  size={200}
-                  isShiny={isShiny}
-                  style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: 180, height: 180 }}
-                />
+            <SpriteImg
+              id={pokemon.id}
+              sprites={detail?.sprites}
+              size={isMobile ? 140 : 200}
+              isShiny={isShiny}
+              style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: isMobile ? 120 : 180, height: isMobile ? 120 : 180 }}
+            />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -166,7 +165,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
             #{String(pokemon.id).padStart(3, '0')}
           </span>
 
-          <span style={{ fontSize: 26, fontWeight: 800, textTransform: 'capitalize' }}>
+          <span style={{ fontSize: isMobile ? 18 : 26, fontWeight: 800, textTransform: 'capitalize', overflowWrap: 'break-word', textAlign: 'center' }}>
             {pokemon.name.replace(/-/g, ' ')}
           </span>
 
@@ -193,7 +192,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           </button>
 
           {/* ── Info grid 4 cols ── */}
-          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: isMobile ? 8 : 10 }}>
             {[
               { label: 'Altura', value: `${(height / 10).toFixed(1)} m` },
               { label: 'Peso', value: `${(weight / 10).toFixed(1)} kg` },
@@ -364,9 +363,11 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
                     <span
                       key={m.move.name}
                       style={{
-                        padding: '4px 10px',
+                        padding: isMobile ? '3px 8px' : '4px 10px',
                         borderRadius: 999,
-                        fontSize: 11,
+                        fontSize: isMobile ? 10 : 11,
+                        maxWidth: '100%',
+                        overflowWrap: 'break-word',
                         textTransform: 'capitalize',
                         background: 'rgba(255,255,255,0.04)',
                         color: 'rgba(255,255,255,0.55)',

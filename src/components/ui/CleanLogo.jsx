@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-export default function CleanLogo({ src, width = 320, style = {} }) {
+export default function CleanLogo({ src, width = 320, style = {}, responsive }) {
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
 
@@ -33,8 +33,8 @@ export default function CleanLogo({ src, width = 320, style = {} }) {
   }, [src, width])
 
   return (
-    <div ref={containerRef} style={{ ...style, display: 'inline-block' }}>
-      <canvas ref={canvasRef} style={{ width, height: 'auto', display: 'block' }} />
+    <div ref={containerRef} style={{ ...style, display: 'inline-block', maxWidth: '100%' }}>
+      <canvas ref={canvasRef} style={{ width: responsive || width, maxWidth: '100%', height: 'auto', display: 'block' }} />
     </div>
   )
 }
