@@ -44,8 +44,24 @@ export default function App() {
   const gridRef = useRef(null)
 
   useEffect(() => {
-    gridRef.current?.scrollTo(0, 0)
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        gridRef.current?.scrollTo(0, 0)
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      }, 0)
+    })
   }, [currentView, selectedGeneration])
+
+  useEffect(() => {
+    if (!isLoading && pokemons.length > 0) {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          gridRef.current?.scrollTo(0, 0)
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        }, 50)
+      })
+    }
+  }, [isLoading, pokemons.length])
 
   useEffect(() => {
     if (selectedPokemonName) {

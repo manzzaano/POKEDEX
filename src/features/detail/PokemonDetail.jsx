@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { fetchPokemonDetail, fetchPokemonSpecies, fetchEvolutionChain } from '../../services/pokeApi'
 import { getWeaknesses } from '../../data/typeChart'
@@ -20,6 +20,12 @@ function parseIdFromUrl(url) {
 
 export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, onSelectPokemon }) {
   if (!pokemon) return null
+
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
 
   const [isShiny, setIsShiny] = useState(false)
 

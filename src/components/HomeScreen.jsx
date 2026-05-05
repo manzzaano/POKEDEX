@@ -65,11 +65,13 @@ export default function HomeScreen({ onSelectRegion }) {
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: 28, textAlign: 'center' }}
         >
-          <img
-            src={`${BASE}pokemon-logo.png`}
-            alt="Pokémon"
-            style={{ width: 'min(320px, 80vw)', marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))' }}
-          />
+          <div style={{ minHeight: 'clamp(60px, 20vw, 95px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img
+              src={`${BASE}pokemon-logo.png`}
+              alt="Pokémon"
+              style={{ width: 'min(320px, 80vw)', marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))' }}
+            />
+          </div>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0', fontWeight: 500 }}>
             Selecciona una región para explorar
           </p>
