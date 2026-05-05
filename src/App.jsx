@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Search, ArrowLeft, Menu, X } from 'lucide-react'
+import { useQueryClient } from '@tanstack/react-query'
 import usePokemons from './hooks/usePokemons'
 import useFavorites from './hooks/useFavorites'
 import usePokedexStore from './store/usePokedexStore'
@@ -25,7 +26,7 @@ const GENERATIONS = [
 const REGION_NAMES = Object.fromEntries(GENERATIONS.map((g) => [g.roman, g.name]))
 
 export default function App() {
-  const { pokemons, allPokemons, isLoading } = usePokemons()
+  const { pokemons, allPokemons, isLoading, error } = usePokemons()
   const { favs, toggle, isFav } = useFavorites()
   const currentView = usePokedexStore((s) => s.currentView)
   const searchQuery = usePokedexStore((s) => s.searchQuery)
@@ -38,6 +39,7 @@ export default function App() {
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedDetail, setSelectedDetail] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const queryClient = useQueryClient()
 
   useEffect(() => {
     if (selectedPokemonName) {
@@ -162,7 +164,28 @@ export default function App() {
         </header>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto content-start px-4 pb-6 md:px-6">
-          {isLoading
+          {error ? (
+            <div className="col-span-full flex flex-col items-center justify-center py-16 gap-4">
+              <div style={{
+                width: 56, height: 56, borderRadius: '50%',
+                background: 'rgba(239,68,68,0.12)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 24, color: '#ef4444',
+              }}>
+                !
+              </div>
+              <p className="text-sm text-white/50 text-center max-w-xs">
+                No se pudo conectar con la PokéAPI. Comprueba tu conexión a internet.
+              </p>
+              <button
+                onClick={() => queryClient.invalidateQueries({ queryKey: ['pokemon-list'] })}
+                className="px-5 py-2.5 rounded-full border border-white/15 bg-white/6 text-white text-sm font-semibold cursor-pointer hover:bg-white/10 transition-colors"
+                style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+              >
+                Reintentar
+              </button>
+            </div>
+          ) : isLoading
             ? Array.from({ length: 12 }).map((_, i) => (
                 <div key={i} style={{
                   background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.18)',
@@ -182,7 +205,7 @@ export default function App() {
                   hovered={hoveredId === p.id} onHover={setHoveredId}
                 />
               ))}
-          {!isLoading && pokemons.length === 0 && (
+          {!error && !isLoading && pokemons.length === 0 && (
             <div className="col-span-full text-center py-10 text-white/60 text-sm">
               No se encontraron Pokémon.
             </div>

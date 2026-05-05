@@ -8,4 +8,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     tailwindcss(),
   ],
+  build: {
+    target: 'es2015',
+  },
 }))

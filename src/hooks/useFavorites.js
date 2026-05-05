@@ -12,15 +12,15 @@ const load = () => {
 }
 
 const persist = (favs) => {
-  const id = requestIdleCallback
+  const id = typeof requestIdleCallback !== 'undefined'
     ? requestIdleCallback(() => {
-        try { localStorage.setItem(KEY, JSON.stringify(favs)) } catch {}
+        try { localStorage.setItem(KEY, JSON.stringify(favs)) } catch { /* localStorage no disponible */ }
       })
     : setTimeout(() => {
-        try { localStorage.setItem(KEY, JSON.stringify(favs)) } catch {}
+        try { localStorage.setItem(KEY, JSON.stringify(favs)) } catch { /* localStorage no disponible */ }
       }, 0)
   return () => {
-    if (cancelIdleCallback) cancelIdleCallback(id)
+    if (typeof cancelIdleCallback !== 'undefined') cancelIdleCallback(id)
     else clearTimeout(id)
   }
 }

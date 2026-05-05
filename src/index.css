@@ -16,6 +16,11 @@
     height: 100%;
   }
 
+  html {
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
   html, body {
     font-family: var(--font-family-sans);
     background: #050505;
