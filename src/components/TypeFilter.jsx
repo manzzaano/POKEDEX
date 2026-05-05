@@ -8,9 +8,13 @@ export default function TypeFilter() {
   const { data: types = [] } = useTypes()
 
   return (
-    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+    <div
+      className="flex gap-2 overflow-x-auto md:flex-wrap pb-0.5"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
       <span
         onClick={() => setSelectedType('')}
+        className="flex items-center justify-center whitespace-nowrap"
         style={{
         padding: '8px 16px',
         borderRadius: 9999,
@@ -22,7 +26,8 @@ export default function TypeFilter() {
         background: selectedType === '' ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.06)',
         color: selectedType === '' ? '#fff' : 'rgba(255,255,255,0.6)',
         userSelect: 'none',
-        minHeight: 36,
+        minHeight: 44,
+        flexShrink: 0,
         }}
       >
         Todos
@@ -34,12 +39,14 @@ export default function TypeFilter() {
           <span
             key={t.name}
             onClick={() => setSelectedType(active ? '' : t.name)}
+            className="flex items-center justify-center whitespace-nowrap"
             style={{
             padding: '8px 16px',
             borderRadius: 9999,
             fontSize: 13,
             fontWeight: 700,
-            minHeight: 36,
+            minHeight: 44,
+            flexShrink: 0,
               cursor: 'pointer',
               border: active
                 ? `1px solid ${color}55`

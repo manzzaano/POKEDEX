@@ -28,13 +28,23 @@ export default function FlavorTextSection({ entries = [] }) {
               key={v}
               onClick={() => setActive(v)}
               style={{
-                width: 18, height: 18, borderRadius: '50%',
-                border: '2px solid',
-                borderColor: v === active ? '#ef4444' : 'rgba(255,255,255,0.3)',
-                background: v === active ? '#ef4444' : 'transparent',
+                width: 44, height: 44, borderRadius: '50%',
                 cursor: 'pointer', transition: 'all .2s', padding: 0,
+                background: 'transparent', border: 'none',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}
-            />
+              title={`Versión ${v}`}
+            >
+              <span
+                style={{
+                  display: 'block', width: 18, height: 18, borderRadius: '50%',
+                  border: '2px solid',
+                  borderColor: v === active ? '#ef4444' : 'rgba(255,255,255,0.3)',
+                  background: v === active ? '#ef4444' : 'transparent',
+                  transition: 'all .2s',
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>

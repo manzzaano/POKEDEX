@@ -93,14 +93,15 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
           onClick={(e) => e.stopPropagation()}
+          className="p-4 sm:p-7"
           style={{
             background: 'rgba(20,20,25,0.92)',
             border: '1px solid rgba(255,255,255,0.15)',
             borderRadius: 24,
-            padding: 28,
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
             maxWidth: 700,
+            width: 'calc(100vw - 32px)',
             maxHeight: '92vh',
             overflowY: 'auto',
             display: 'flex',
@@ -113,20 +114,16 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
         >
           <button
             onClick={onClose}
-            style={{
-              position: 'absolute', top: 18, right: 22,
-              background: 'none', border: 'none', color: '#fff',
-              fontSize: 22, cursor: 'pointer', opacity: 0.5,
-              zIndex: 10,
-            }}
+            className="absolute top-3 right-3 bg-transparent border-0 text-white cursor-pointer hover:opacity-80 z-10 flex items-center justify-center"
+            style={{ fontSize: 22, opacity: 0.5, minWidth: 44, minHeight: 44 }}
           >
             ✕
           </button>
 
           <button
             onClick={() => setIsShiny((s) => !s)}
-            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110"
-            style={{ top: 21, right: 58, opacity: isShiny ? 1 : 0.55 }}
+            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center"
+            style={{ top: 14, right: 54, opacity: isShiny ? 1 : 0.55, minWidth: 44, minHeight: 44 }}
             title={isShiny ? 'Ver normal' : 'Ver shiny'}
           >
             <ShinyIcon active={isShiny} size={22} />
@@ -135,7 +132,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           {/* ── Header: sprite + name + category ── */}
           <div
             style={{
-              width: 180, height: 180, borderRadius: '50%',
+              width: 'min(180px, 40vw)', height: 'min(180px, 40vw)', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               background: `radial-gradient(circle, ${primaryColor}22 0%, transparent 70%)`,
               marginTop: -16,
@@ -155,7 +152,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
               sprites={detail?.sprites}
               size={180}
               isShiny={isShiny}
-              style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: 160, height: 160 }}
+              style={{ filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.5))', width: 'min(160px, 35vw)', height: 'min(160px, 35vw)' }}
             />
               </motion.div>
             </AnimatePresence>
@@ -184,15 +181,15 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
 
           <button
             onClick={() => onToggleFav(pokemon.id)}
-            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110"
-            style={{ top: 22, left: 22, opacity: isFav ? 1 : 0.55 }}
+            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center"
+            style={{ top: 14, left: 14, opacity: isFav ? 1 : 0.55, minWidth: 44, minHeight: 44 }}
             title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           >
             <RetroHeart filled={isFav} size={28} />
           </button>
 
           {/* ── Info grid 4 cols ── */}
-          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
             {[
               { label: 'Altura', value: `${(height / 10).toFixed(1)} m` },
               { label: 'Peso', value: `${(weight / 10).toFixed(1)} kg` },

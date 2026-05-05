@@ -66,9 +66,11 @@ export default function SpriteImg({ id, sprites, size = 200, isShiny = false, st
     <img
       src={src || PLACEHOLDER}
       alt=""
-      width={size}
-      height={size}
       style={{
+        width: size,
+        maxWidth: '100%',
+        height: 'auto',
+        aspectRatio: '1 / 1',
         objectFit: 'contain',
         transition: 'opacity 0.35s ease',
         opacity: phase === 'hires' ? 1 : phase === 'lowres' ? 0.55 : 0,

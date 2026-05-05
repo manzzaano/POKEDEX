@@ -25,7 +25,7 @@ export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, o
       onMouseEnter={handleMouseEnter}
       onMouseLeave={() => onHover?.(null)}
       onClick={() => onSelect(pokemon.name)}
-      className="relative cursor-pointer flex flex-col items-center gap-2"
+      className="relative cursor-pointer flex flex-col items-center gap-2 w-full max-w-full"
       style={{
         background: 'rgba(255,255,255,0.04)',
         border: '1px solid rgba(255,255,255,0.18)',
@@ -38,8 +38,8 @@ export default function PokemonCard({ pokemon, types = [], isFav, onToggleFav, o
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggleFav(pokemon.id) }}
-        className="absolute bg-transparent border-0 cursor-pointer transition-all"
-        style={{ top: 10, right: 10, opacity: isFav ? 1 : 0.55 }}
+        className="absolute bg-transparent border-0 cursor-pointer transition-all flex items-center justify-center"
+        style={{ top: 8, right: 8, opacity: isFav ? 1 : 0.55, minWidth: 44, minHeight: 44 }}
         title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
       >
         <RetroHeart filled={isFav} size={20} />
