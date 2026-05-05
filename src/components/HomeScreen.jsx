@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import SocialLinks from './ui/SocialLinks'
 
 const STARTERS = [
   [1, 4, 7],
@@ -49,9 +50,15 @@ function StarterSprite({ id }) {
 }
 
 export default function HomeScreen({ onSelectRegion }) {
+  const scrollRef = useRef(null)
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo(0, 0)
+  }, [])
+
   return (
     <AnimatePresence>
-      <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      <motion.div key="home" ref={scrollRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', overflowY: 'auto' }}
       >
@@ -126,9 +133,9 @@ export default function HomeScreen({ onSelectRegion }) {
           </motion.button>
         </motion.div>
 
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', marginTop: 28, textAlign: 'center' }}>
-          Desarrollado por Ismael Manzano León
-        </p>
+        <div style={{ marginTop: 28 }}>
+          <SocialLinks />
+        </div>
       </motion.div>
     </AnimatePresence>
   )

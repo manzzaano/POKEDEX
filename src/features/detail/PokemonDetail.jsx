@@ -114,7 +114,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
         >
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 bg-transparent border-0 text-white cursor-pointer hover:opacity-80 z-10 flex items-center justify-center"
+            className="absolute top-3 right-3 bg-transparent border-0 text-white cursor-pointer hover:opacity-80 z-50 flex items-center justify-center"
             style={{ fontSize: 22, opacity: 0.5, minWidth: 44, minHeight: 44 }}
           >
             ✕
@@ -122,7 +122,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
 
           <button
             onClick={() => setIsShiny((s) => !s)}
-            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center"
+            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center z-50"
             style={{ top: 14, right: 54, opacity: isShiny ? 1 : 0.55, minWidth: 44, minHeight: 44 }}
             title={isShiny ? 'Ver normal' : 'Ver shiny'}
           >
@@ -136,6 +136,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               background: `radial-gradient(circle, ${primaryColor}22 0%, transparent 70%)`,
               marginTop: -16,
+              pointerEvents: 'none',
             }}
           >
             <AnimatePresence mode="wait">
@@ -181,7 +182,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
 
           <button
             onClick={() => onToggleFav(pokemon.id)}
-            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center"
+            className="absolute bg-transparent border-0 cursor-pointer transition-all hover:scale-110 flex items-center justify-center z-50"
             style={{ top: 14, left: 14, opacity: isFav ? 1 : 0.55, minWidth: 44, minHeight: 44 }}
             title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           >

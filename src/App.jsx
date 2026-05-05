@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Search, ArrowLeft, Menu, X } from 'lucide-react'
 import { useQueryClient } from '@tanstack/react-query'
 import usePokemons from './hooks/usePokemons'
@@ -10,6 +10,7 @@ import PokemonCard from './components/ui/PokemonCard'
 import PokemonDetail from './features/detail/PokemonDetail'
 import SpriteImg from './components/ui/SpriteImg'
 import Skeleton from './components/ui/Skeleton'
+import SocialLinks from './components/ui/SocialLinks'
 
 const GENERATIONS = [
   { roman: 'I', name: 'Kanto', start: 1, end: 151 },
@@ -40,6 +41,11 @@ export default function App() {
   const [selectedDetail, setSelectedDetail] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const queryClient = useQueryClient()
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    gridRef.current?.scrollTo(0, 0)
+  }, [currentView, selectedGeneration])
 
   useEffect(() => {
     if (selectedPokemonName) {
@@ -115,9 +121,9 @@ export default function App() {
             </div>
           </div>
         ))}
-        <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.08)', textAlign: 'center', marginTop: 'auto', paddingTop: 12 }}>
-          Ismael Manzano León
-        </span>
+        <div style={{ marginTop: 'auto', paddingTop: 12 }}>
+          <SocialLinks compact />
+        </div>
       </aside>
 
       <main className="flex-1 flex flex-col h-full overflow-hidden">
@@ -163,7 +169,7 @@ export default function App() {
           <TypeFilter />
         </header>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto content-start px-4 pb-6 md:px-6">
+        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto content-start px-4 pb-6 md:px-6">
           {error ? (
             <div className="col-span-full flex flex-col items-center justify-center py-16 gap-4">
               <div style={{
