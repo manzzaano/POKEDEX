@@ -51,7 +51,8 @@ Transiciones entre regiones, evoluciones y modales con **Framer Motion**.
 </table>
 
 ## Tecnologías
-
+<div align="center">
+  
 | Tecnología | Uso |
 |---|---|
 | **React 19** | UI declarativa con hooks |
@@ -62,6 +63,8 @@ Transiciones entre regiones, evoluciones y modales con **Framer Motion**.
 | **Framer Motion** | Animaciones fluidas |
 | **Lucide React** | Iconografía |
 | **PokéAPI** | Datos de Pokémon |
+
+</div>
 
 ## Ejecución local
 
