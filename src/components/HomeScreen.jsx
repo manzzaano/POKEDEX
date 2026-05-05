@@ -60,8 +60,9 @@ export default function HomeScreen({ onSelectRegion }) {
     <AnimatePresence>
       <motion.div key="home" ref={scrollRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', overflowY: 'auto' }}
+        style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '24px 16px' }}
       >
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 'auto 0', width: '100%' }}>
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: 28, textAlign: 'center' }}
         >
@@ -137,6 +138,7 @@ export default function HomeScreen({ onSelectRegion }) {
 
         <div style={{ marginTop: 28 }}>
           <SocialLinks />
+        </div>
         </div>
       </motion.div>
     </AnimatePresence>
