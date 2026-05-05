@@ -91,6 +91,10 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
           position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
           backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
           zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          paddingTop: 'max(16px, env(safe-area-inset-top))',
+          paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+          paddingLeft: 'max(0px, env(safe-area-inset-left))',
+          paddingRight: 'max(0px, env(safe-area-inset-right))',
         }}
       >
         <motion.div
@@ -108,7 +112,7 @@ export default function PokemonDetail({ pokemon, onClose, isFav, onToggleFav, on
             WebkitBackdropFilter: 'blur(24px)',
             maxWidth: 700,
             width: 'calc(100vw - 32px)',
-            maxHeight: '92vh',
+            maxHeight: 'calc(100dvh - max(32px, 2 * env(safe-area-inset-top, 16px)) - max(32px, 2 * env(safe-area-inset-bottom, 16px)))',
             overflowY: 'auto',
             display: 'flex',
             flexDirection: 'column',
