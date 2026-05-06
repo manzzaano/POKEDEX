@@ -68,7 +68,7 @@ export default function HomeScreen({ onSelectRegion }) {
         >
           <div style={{ minHeight: 'clamp(60px, 20vw, 95px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <img
-              src={`${BASE}pokemon-logo.png`}
+              src={`${BASE}pokecore-logo.png`}
               alt="Pokémon"
               style={{ width: 'min(320px, 80vw)', marginBottom: 8, filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.6))' }}
             />

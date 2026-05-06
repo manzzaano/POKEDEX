@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/pokemon-logo.png" alt="Pokédex Logo" width="360" />
+  <img src="public/pokecore-logo.png" alt="Pokédex Logo" width="360" />
   
   ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
   ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite)
