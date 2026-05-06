@@ -43,7 +43,7 @@ const cardVariants = {
 function StarterSprite({ id }) {
   const [src, setSrc] = useState(ART(id))
   return (
-    <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 65%)' }}>
+    <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 65%)' }}>
       <img src={src} alt="" style={{ width: 60, height: 60, objectFit: 'contain', filter: 'drop-shadow(0 3px 8px rgba(0,0,0,0.4))' }} onError={() => setSrc(FALL(id))} />
     </div>
   )
@@ -124,7 +124,7 @@ export default function HomeScreen({ onSelectRegion }) {
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)' }}
           >
             <div style={{ display: 'flex', gap: 4, alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)' }}>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 65%)' }}>
                 <img src={`${BASE}pokeball.png`} alt="" style={{ width: 48, height: 48, objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
               </div>
             </div>
